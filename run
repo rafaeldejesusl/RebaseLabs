@@ -1,0 +1,24 @@
+#!/bin/bash
+
+docker network create rebase-labs
+
+docker run \
+  --rm \
+  -d \
+  --name pgserver \
+  -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=rebaselabs \
+  -v $(pwd)/pgdata:/var/lib/postgresql/data \
+  --network rebase-labs \
+  postgres \
+
+docker run \
+  --rm \
+  --name rebase-labs \
+  -w /app \
+  -v $(pwd):/app \
+  -p 3000:3000 \
+  --network rebase-labs \
+  ruby \
+  bash -c "gem install rack sinatra puma pg && ruby server.rb"
+
+docker stop pgserver
