@@ -16,9 +16,10 @@ docker run \
   --name rebase-labs \
   -w /app \
   -v $(pwd):/app \
+  -v labs-gems:/usr/local/bundle \
   -p 3000:3000 \
   --network rebase-labs \
   ruby \
-  bash -c "gem install rack sinatra sinatra-cors puma pg && ruby server.rb"
+  bash -c "bundle install && ruby server.rb"
 
 docker stop pgserver
