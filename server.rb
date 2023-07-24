@@ -22,6 +22,19 @@ get '/tests' do
   end
 end
 
+get '/tests/:token' do
+  begin
+    conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
+    result = conn.exec("SELECT * FROM clients WHERE exam_result_token = '#{params['token']}'").entries
+    result.to_json   
+  rescue => exception
+    puts exception
+    error = { message: 'Erro Interno da Aplicação' }
+    status 500
+    error.to_json
+  end
+end
+
 get '/hello' do
   'Hello world!'
 end

@@ -1,13 +1,27 @@
+.table-container {
+  overflow: auto;
+  height: 100%;
+}
+
+.table-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 table {
   border: 3px double black;
   border-collapse: collapse;
   text-align: center;
-	vertical-align: middle;
+  display: block;
+  width: 100%;
+  height: 75%;
+  overflow: scroll;
 }
 
 th, td {
   border-left: 1px solid black;
-  border-left: 1px solid black;
+  border-right: 1px solid black;
   padding: 8px; 
 }
 

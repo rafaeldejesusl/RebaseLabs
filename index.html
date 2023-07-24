@@ -3,25 +3,37 @@
 </head>
 <body>
   <h1>Exames</h1>
-  <table>
-    <tr>
-      <th>CPF</th>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Data de Nascimento</th>
-      <th>Endereço</th>
-      <th>Cidade</th>
-      <th>Estado</th>
-      <th>CRM do Médico</th>
-      <th>Estado do CRM do Médico</th>
-      <th>Nome do Médico</th>
-      <th>Email do Médico</th>
-      <th>Token do Resultado</th>
-      <th>Data do Exame</th>
-      <th>Tipo do Exame</th>
-      <th>Limites do Tipo de Exame</th>
-      <th>Resultado do Exame</th>
-    </tr>
-  </table>
+  <div>
+    <input type="text" name="token" id="token-input">
+    <button type="submit" onclick="searchToken()">Pesquisar</button>
+  </div>
+  <div>
+    <button type="reset" onclick="backHome()">Voltar para Home</button>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>CPF</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Data de Nascimento</th>
+          <th>Endereço</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>CRM do Médico</th>
+          <th>Estado do CRM do Médico</th>
+          <th>Nome do Médico</th>
+          <th>Email do Médico</th>
+          <th>Token do Resultado</th>
+          <th>Data do Exame</th>
+          <th>Tipo do Exame</th>
+          <th>Limites do Tipo de Exame</th>
+          <th>Resultado do Exame</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
   <script src="main.js"></script>
 </body>
