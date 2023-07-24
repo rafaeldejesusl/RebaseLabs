@@ -1,13 +1,16 @@
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet"> 
   <link href="styles.css" rel="stylesheet" media="all" />
 </head>
 <body>
   <h1>Exames</h1>
-  <div>
-    <input type="text" name="token" id="token-input">
+  <div class="bar-container">
+    <input type="text" name="token" id="token-input" oninput="let p = this.selectionStart; this.value = this.value.toUpperCase();this.setSelectionRange(p, p);" />
     <button type="submit" onclick="searchToken()">Pesquisar</button>
   </div>
-  <div>
+  <div class="reset-container">
     <button type="reset" onclick="backHome()">Voltar para Home</button>
   </div>
   <div class="table-container">
@@ -22,13 +25,13 @@
           <th>Cidade</th>
           <th>Estado</th>
           <th>CRM do Médico</th>
-          <th>Estado do CRM do Médico</th>
+          <th>Estado do CRM</th>
           <th>Nome do Médico</th>
           <th>Email do Médico</th>
           <th>Token do Resultado</th>
           <th>Data do Exame</th>
           <th>Tipo do Exame</th>
-          <th>Limites do Tipo de Exame</th>
+          <th>Limites do Exame</th>
           <th>Resultado do Exame</th>
         </tr>
       </thead>
