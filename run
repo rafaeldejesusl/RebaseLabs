@@ -19,6 +19,6 @@ docker run \
   -p 3000:3000 \
   --network rebase-labs \
   ruby \
-  bash -c "gem install rack sinatra puma pg && ruby server.rb"
+  bash -c "gem install rack sinatra sinatra-cors puma pg && ruby server.rb"
 
 docker stop pgserver

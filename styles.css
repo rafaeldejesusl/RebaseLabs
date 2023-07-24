@@ -1,0 +1,29 @@
+table {
+  border: 3px double black;
+  border-collapse: collapse;
+  text-align: center;
+	vertical-align: middle;
+}
+
+th, td {
+  border-left: 1px solid black;
+  border-left: 1px solid black;
+  padding: 8px; 
+}
+
+th {
+  background-color: #fc1c41;
+  color: white;
+}
+
+td {
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #eee;
+}

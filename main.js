@@ -1,17 +1,23 @@
 const fragment = new DocumentFragment();
-const url = 'https://musicbrainz.org/ws/2/genre/all?limit=20&offset=1307&fmt=json';
+const api = 'http://localhost:3000/tests'
 
-fetch(url).
+fetch(api).
   then((response) => response.json()).
   then((data) => {
-    data.genres.forEach(function(genre) {
-      const li = document.createElement('li');
-      li.textContent = `${genre.name}`;
-      fragment.appendChild(li);
+    data.forEach(function(exam) {
+      const tr = document.createElement('tr');
+      values = Object.values(exam);
+      values.shift();
+      values.forEach(value => {
+        const tb = document.createElement('td');
+        tb.textContent = `${value}`;
+        tr.appendChild(tb);
+      });
+      fragment.appendChild(tr);
     })
   }).
   then(() => {
-    document.querySelector('ul').appendChild(fragment);
+    document.querySelector('tbody').appendChild(fragment);
   }).
   catch(function(error) {
     console.log(error);
