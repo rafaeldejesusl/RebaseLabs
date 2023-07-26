@@ -2,6 +2,7 @@ require 'csv'
 require 'pg'
 
 conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
+conn.exec('DROP TABLE IF EXISTS clients;')
 conn.exec('CREATE TABLE clients (id serial primary key, cpf text, patient_name text,
   patient_email text, patient_birth_date date, patient_address text,
   patient_city text, patient_state text, doctor_crm text,
@@ -24,3 +25,5 @@ rows.map do |row|
     '#{row[12]}', '#{row[13]}', '#{row[14]}', '#{row[15]}')"
   )
 end
+
+conn.close

@@ -4,11 +4,16 @@ require 'csv'
 require 'pg'
 require "sinatra/cors"
 
+set :public_folder, __dir__ + '/static'
 set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
 set :allow_headers, "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept, if-modified-since"
 set :expose_headers, "location,link"
 
+
+get '/' do
+  File.open('index.html')
+end
 
 get '/tests' do
   begin
@@ -19,6 +24,8 @@ get '/tests' do
     error = { message: 'Erro Interno da Aplicação' }
     status 500
     error.to_json
+  ensure
+    conn.close
   end
 end
 
@@ -32,6 +39,8 @@ get '/tests/:token' do
     error = { message: 'Erro Interno da Aplicação' }
     status 500
     error.to_json
+  ensure
+    conn.close
   end
 end
 
