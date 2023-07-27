@@ -2,7 +2,8 @@ require 'sinatra'
 require 'rack/handler/puma'
 require 'csv'
 require 'pg'
-require "sinatra/cors"
+require 'sinatra/cors'
+require_relative 'import_data'
 
 set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
@@ -35,12 +36,23 @@ get '/tests/:token' do
     result = conn.exec("SELECT * FROM clients WHERE exam_result_token = '#{params['token']}'").entries
     result.to_json   
   rescue => exception
-    puts exception
     error = { message: 'Erro Interno da Aplicação' }
     status 500
     error.to_json
   ensure
     conn.close
+  end
+end
+
+post '/import' do
+  begin
+    file = params[:file][:tempfile]
+  
+    import_data(file)
+  
+    redirect '/'   
+  rescue => exception
+    redirect '/'
   end
 end
 

@@ -7,8 +7,14 @@
 <body>
   <h1>Exames</h1>
   <div class="bar-container">
-    <input type="text" name="token" id="token-input" oninput="let p = this.selectionStart; this.value = this.value.toUpperCase();this.setSelectionRange(p, p);" />
-    <button type="submit" onclick="searchToken()">Pesquisar</button>
+    <form action="http://localhost:3000/import" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <button type="submit">Importar Dados</button>
+    </form>
+    <div>
+      <input type="text" name="token" id="token-input" oninput="let p = this.selectionStart; this.value = this.value.toUpperCase();this.setSelectionRange(p, p);" />
+      <button type="submit" onclick="searchToken()">Pesquisar</button>
+    </div>
   </div>
   <div class="reset-container">
     <button type="reset" onclick="backHome()">Voltar para Home</button>
