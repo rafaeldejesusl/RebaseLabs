@@ -21,7 +21,7 @@ get '/loading' do
   File.open('loading.html')
 end
 
-get '/tests' do
+get '/api/tests' do
   begin
     conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
     result = conn.exec('SELECT * FROM clients').entries
@@ -35,7 +35,7 @@ get '/tests' do
   end
 end
 
-get '/tests/:token' do
+get '/api/tests/:token' do
   begin
     conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
     result = conn.exec("SELECT * FROM clients WHERE exam_result_token = '#{params['token']}'").entries
@@ -49,7 +49,7 @@ get '/tests/:token' do
   end
 end
 
-post '/import' do
+post '/api/import' do
   begin
     file = params[:file][:tempfile]
   

@@ -57,7 +57,7 @@ FrontEnd da aplicação
 
 Request:
 ```bash
-GET /tests
+GET /api/tests
 ```
 
 Response:
@@ -88,7 +88,7 @@ Response:
 
 Request:
 ```bash
-GET /tests/IQCZ17
+GET /api/tests/IQCZ17
 ```
 
 Response:
@@ -117,11 +117,9 @@ Response:
 
 ---
 
-> :warning: **Em Implementação**
-
 Request:
 ```bash
-POST /import
+POST /api/import
 ```
 
 Content:

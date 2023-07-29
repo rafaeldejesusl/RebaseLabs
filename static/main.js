@@ -1,5 +1,5 @@
 const fragment = new DocumentFragment();
-const api = 'http://localhost:3000/tests'
+const api = 'http://localhost:3000/api/tests'
 
 function findData(url) {  
   fetch(url).
