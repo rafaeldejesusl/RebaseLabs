@@ -11,11 +11,10 @@ def import_data(csv)
     exam_result_token text, exam_date date, exam_type text,
     limits_exam_type text, result_exam_type text);'
   )
-  rows = CSV.read(csv, col_sep: ';')
   
-  columns = rows.shift
+  columns = csv.shift
   
-  rows.map do |row|
+  csv.map do |row|
     conn.exec("INSERT INTO clients(cpf, patient_name,
       patient_email, patient_birth_date, patient_address,
       patient_city, patient_state, doctor_crm,

@@ -98,3 +98,7 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: #eee;
 }
+
+.text-container {
+  text-align: center;
+}

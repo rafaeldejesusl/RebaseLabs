@@ -37,3 +37,7 @@ function backHome() {
   document.querySelector('tbody').innerHTML = '';
   findData(api);
 }
+
+function leaveLoading() {
+  window.location.href = 'http://localhost:3000';
+}

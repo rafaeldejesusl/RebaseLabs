@@ -2,24 +2,35 @@
 
 docker network create rebase-labs
 
-docker run \
+docker-compose run \
+  --rm \
+  -d \
+  --name redis \
+  redis
+
+docker-compose run \
+  --rm \
+  -d \
+  --name redis-worker \
+  app \
+  bash -c "sidekiq -r ./importer.rb"
+
+docker-compose run \
   --rm \
   -d \
   --name pgserver \
-  -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=rebaselabs \
-  -v $(pwd)/pgdata:/var/lib/postgresql/data \
-  --network rebase-labs \
-  postgres \
+  pgserver
 
-docker run \
+docker-compose run \
   --rm \
   --name rebase-labs \
-  -w /app \
-  -v $(pwd):/app \
-  -v labs-gems:/usr/local/bundle \
-  -p 3000:3000 \
-  --network rebase-labs \
-  ruby \
+  --service-ports \
+  app \
   bash -c "bundle install && ruby server.rb"
 
 docker stop pgserver
+docker stop redis-worker
+docker stop redis
+docker rm redis-worker
+docker rm redis
+docker rm pgserver

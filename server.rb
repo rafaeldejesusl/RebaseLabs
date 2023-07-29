@@ -4,6 +4,7 @@ require 'csv'
 require 'pg'
 require 'sinatra/cors'
 require_relative 'import_data'
+require_relative 'importer'
 
 set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
@@ -14,6 +15,10 @@ set :public_folder, __dir__ + '/static'
 
 get '/' do
   File.open('index.html')
+end
+
+get '/loading' do
+  File.open('loading.html')
 end
 
 get '/tests' do
@@ -48,9 +53,9 @@ post '/import' do
   begin
     file = params[:file][:tempfile]
   
-    import_data(file)
+    Importer.perform_async(CSV.read(file, col_sep: ';').to_json)
   
-    redirect '/'   
+    redirect '/loading'   
   rescue => exception
     redirect '/'
   end
