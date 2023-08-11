@@ -30,7 +30,7 @@ $ git clone git@github.com:rafaeldejesusl/RebaseLabs.git
 ```
 Para iniciar o servidor, execute o script que roda a imagem no Docker:
 ```bash
-$ bash run
+$ bin/run
 ```
 Para popular o banco de dados com as informações do CSV, entre no contêiner do servidor:
 ```bash
