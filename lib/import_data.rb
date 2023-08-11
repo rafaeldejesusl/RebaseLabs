@@ -1,8 +1,8 @@
 require 'csv'
-require 'pg'
+require_relative 'connection'
 
 def import_data(csv)
-  conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
+  conn = Connection.new('pgserver', 'rebaselabs', 'docker', 'docker' )
   conn.exec('DROP TABLE IF EXISTS clients;')
   conn.exec('CREATE TABLE clients (id serial primary key, cpf text, patient_name text,
     patient_email text, patient_birth_date date, patient_address text,
@@ -25,6 +25,4 @@ def import_data(csv)
       '#{row[12]}', '#{row[13]}', '#{row[14]}', '#{row[15]}')"
     )
   end
-  
-  conn.close
 end

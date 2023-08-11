@@ -1,16 +1,18 @@
 require 'sinatra'
 require 'rack/handler/puma'
 require 'csv'
-require 'pg'
 require 'sinatra/cors'
 require_relative 'lib/import_data'
 require_relative 'lib/importer'
+require_relative 'lib/connection'
 
 set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
 set :allow_headers, "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept, if-modified-since"
 set :expose_headers, "location,link"
+set :public_folder, __dir__ + '/static'
 
+conn = Connection.new('pgserver', 'rebaselabs', 'docker', 'docker' )
 
 get '/' do
   File.open('index.html')
@@ -22,29 +24,23 @@ end
 
 get '/api/tests' do
   begin
-    conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
     result = conn.exec('SELECT * FROM clients').entries
     result.to_json   
   rescue => exception
     error = { message: 'Erro Interno da Aplicação' }
     status 500
     error.to_json
-  ensure
-    conn.close
   end
 end
 
 get '/api/tests/:token' do
   begin
-    conn = PG.connect( host: 'pgserver', dbname: 'rebaselabs', user: 'docker', password: 'docker' )
     result = conn.exec("SELECT * FROM clients WHERE exam_result_token = '#{params['token']}'").entries
     result.to_json   
   rescue => exception
     error = { message: 'Erro Interno da Aplicação' }
     status 500
     error.to_json
-  ensure
-    conn.close
   end
 end
 
