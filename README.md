@@ -38,7 +38,7 @@ $ docker exec -it rebase-labs bash
 ```
 E execute o arquivo que importa os dados:
 ```bash
-$ ruby import_from_csv.rb 
+$ ruby lib/import_from_csv.rb 
 ```
 
 ---

@@ -3,8 +3,8 @@ require 'rack/handler/puma'
 require 'csv'
 require 'pg'
 require 'sinatra/cors'
-require_relative 'import_data'
-require_relative 'importer'
+require_relative 'lib/import_data'
+require_relative 'lib/importer'
 
 set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
