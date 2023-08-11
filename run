@@ -13,7 +13,7 @@ docker-compose run \
   -d \
   --name redis-worker \
   app \
-  bash -c "sidekiq -r ./lib/importer.rb"
+  bash -c "bundle install && sidekiq -r ./lib/importer.rb"
 
 docker-compose run \
   --rm \

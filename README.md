@@ -57,6 +57,16 @@ FrontEnd da aplicação
 
 Request:
 ```bash
+GET /loading
+```
+
+Response:
+FrontEnd da tela de carregamento
+
+---
+
+Request:
+```bash
 GET /api/tests
 ```
 
