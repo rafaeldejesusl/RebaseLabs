@@ -10,7 +10,6 @@ set :allow_origin, "*"
 set :allow_methods, "GET,DELETE,PATCH,OPTIONS"
 set :allow_headers, "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept, if-modified-since"
 set :expose_headers, "location,link"
-set :public_folder, __dir__ + '/static'
 
 
 get '/' do
