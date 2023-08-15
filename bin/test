@@ -1,0 +1,36 @@
+#!/bin/bash
+
+docker network create rebase-labs
+
+docker-compose run \
+  --rm \
+  -d \
+  --name redis \
+  redis
+
+docker-compose run \
+  --rm \
+  -d \
+  --name redis-worker \
+  app \
+  bash -c "bundle install && sidekiq -r ./lib/importer.rb"
+
+docker-compose run \
+  --rm \
+  -d \
+  --name pgservertest \
+  pgservertest
+
+docker-compose run \
+  --rm \
+  --name rebase-labs-test \
+  --service-ports \
+  app \
+  bash -c "bundle install && rspec"
+
+docker stop pgservertest
+docker stop redis-worker
+docker stop redis
+docker rm redis-worker
+docker rm redis
+docker rm pgservertest

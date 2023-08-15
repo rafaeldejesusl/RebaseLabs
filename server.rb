@@ -12,7 +12,11 @@ set :allow_headers, "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cac
 set :expose_headers, "location,link"
 set :public_folder, __dir__ + '/static'
 
-conn = Connection.new('pgserver', 'rebaselabs', 'docker', 'docker' )
+if ENV['APP_ENV'] != 'test'
+  conn = Connection.new('pgserver', 'rebaselabs', 'docker', 'docker' )
+else
+  conn = Connection.new('pgservertest', 'rebaselabs', 'docker', 'docker' )
+end
 
 get '/' do
   File.open('index.html')
@@ -23,14 +27,8 @@ get '/loading' do
 end
 
 get '/api/tests' do
-  begin
     result = conn.exec('SELECT * FROM clients').entries
     result.to_json   
-  rescue => exception
-    error = { message: 'Erro Interno da Aplicação' }
-    status 500
-    error.to_json
-  end
 end
 
 get '/api/tests/:token' do
@@ -60,8 +58,10 @@ get '/hello' do
   'Hello world!'
 end
 
-Rack::Handler::Puma.run(
-  Sinatra::Application,
-  Port: 3000,
-  Host: '0.0.0.0'
-)
+if ENV['APP_ENV'] != 'test'
+  Rack::Handler::Puma.run(
+    Sinatra::Application,
+    Port: 3000,
+    Host: '0.0.0.0'
+  )
+end
