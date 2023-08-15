@@ -13,6 +13,7 @@ Uma app web para listagem de exames médicos.
 * Javascript
 * HTML
 * CSS
+* RSpec
 
 ---
 
@@ -137,6 +138,15 @@ Content:
 ```csv
 cpf;nome paciente;email paciente;data nascimento paciente;endereço/rua paciente;cidade paciente;estado patiente;crm médico;crm médico estado;nome médico;email médico;token resultado exame;data exame;tipo exame;limites tipo exame;resultado tipo exame
 048.973.170-88;Emilly Batista Neto;gerald.crona@ebert-quigley.com;2001-03-11;165 Rua Rafaela;Ituverava;Alagoas;B000BJ20J4;PI;Maria Luiza Pires;denna@wisozk.biz;IQCZ17;2021-08-05;hemácias;45-52;97
+```
+
+---
+
+### Testes
+Os testes de requisição da API foram feitos utilizando o RSpec. Para rodá-los, utilize o seguinte comando:
+
+```bash
+$ bin/test
 ```
 
 ---
